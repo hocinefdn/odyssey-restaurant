@@ -5,7 +5,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-    "build:contract": "tsx src/export-openapi.ts"
+    "build:contract": "tsx src/export-openapi.ts",
+    "export:openapi": "tsx src/get-openapi.ts"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.6.1",
