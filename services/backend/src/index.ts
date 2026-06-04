@@ -1,9 +1,10 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 import { swaggerUI } from "@hono/swagger-ui";
+import menuRouter from "./routes/menu";
 
 const app = new OpenAPIHono();
 
-// 1. On définit le schéma de réponse avec Zod
+// On définit le schéma de réponse avec Zod
 const HealthResponseSchema = z
   .object({
     status: z.string().openapi({ example: "ok" }),
@@ -34,7 +35,7 @@ app.openapi(healthRoute, (c) => {
       status: "ok",
     },
     200,
-  ); // Le code 200 est obligatoire ici pour valider le type de la réponse
+  );
 });
 
 // Endpoint pour le contrat
@@ -45,5 +46,8 @@ app.doc("/openapi.json", {
 
 // Swagger UI to visualize the OpenAPI spec
 app.get("/docs", swaggerUI({ url: "/openapi.json" }));
+
+// Mount our menu lifecycle domains
+app.route("/api", menuRouter);
 
 export default app;
